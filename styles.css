@@ -1,0 +1,39 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.calc-frame {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: solid black 1px;
+}
+
+button {
+  width: 6rem;
+  height: 6rem;
+}
+
+.clear {
+  grid-column: 1 / 3;
+  width: 12rem;
+}
+
+.display {
+  grid-column: 1 / 5;
+  height: 6rem;
+  font-size: 6rem;
+  font-family: monospace;
+  text-align: right;
+}
