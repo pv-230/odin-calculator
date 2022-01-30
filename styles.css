@@ -32,8 +32,10 @@ button {
 
 .display {
   grid-column: 1 / 5;
+  display: flex;
+  justify-content: right;
+  align-items: center;
   height: 6rem;
   font-size: 6rem;
   font-family: monospace;
-  text-align: right;
 }
