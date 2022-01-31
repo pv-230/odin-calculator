@@ -86,7 +86,13 @@ function updateDisplay() {
     display.setAttribute('style', 'font-size: 1.8rem;');
   }
 
-  display.textContent = displayValue;
+  if (!displayValue) {
+    displayValue = '0';
+    display.textContent = displayValue;
+    displayValue = '';
+  } else {
+    display.textContent = displayValue;
+  }
 }
 
 /**
@@ -144,7 +150,7 @@ function performOperation() {
 }
 
 /**
- *
+ * Adds a single decimal to an operand.
  */
 function enterDecimal() {
   if (displayValue.includes('.')) {
@@ -166,17 +172,33 @@ function enterDecimal() {
   updateDisplay();
 }
 
-// Sets up digit buttons with event listeners
+/**
+ * Removes the last digit from the display.
+ */
+function removeLast() {
+  if (displayValue) {
+    const temp = displayValue.split('');
+    temp.pop();
+    displayValue = temp.join('');
+
+    if (displayValue === '-') {
+      displayValue = '';
+    }
+
+    updateDisplay();
+  }
+}
+
+// Event listener section
+
 const digits = document.querySelectorAll('.digit');
 digits.forEach((digit) => digit.addEventListener('click', enterDigit));
 
-// Sets up operator buttons with event listeners
 const operators = document.querySelectorAll('.operator');
 operators.forEach((operator) => {
   operator.addEventListener('click', performOperation);
 });
 
-// Sets up clear button with event listener
 const clear = document.querySelector('.clear');
 clear.addEventListener('click', () => {
   operation.splice(0, operation.length);
@@ -186,6 +208,8 @@ clear.addEventListener('click', () => {
   currentOperator = '';
 });
 
-// Sets up decimal button with event listener
 const decimal = document.querySelector('.decimal');
 decimal.addEventListener('click', enterDecimal);
+
+const back = document.querySelector('.back');
+back.addEventListener('click', removeLast);
