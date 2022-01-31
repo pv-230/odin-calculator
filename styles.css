@@ -58,6 +58,7 @@ button:hover {
   font-family: monospace;
   background-color: #dfdfdf;
   border: solid 2px black;
+  border-radius: 6px;
 }
 
 .operator {
