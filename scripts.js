@@ -120,7 +120,7 @@ function performOperation() {
   }
 
   if (displayValue) {
-    operation.push(Number.parseInt(displayValue, 10));
+    operation.push(Number.parseFloat(displayValue, 10));
     displayValue = '';
   }
 
@@ -143,6 +143,29 @@ function performOperation() {
   }
 }
 
+/**
+ *
+ */
+function enterDecimal() {
+  if (displayValue.includes('.')) {
+    return;
+  }
+
+  if (displayValue.length === 16) {
+    return; // 16 digits is the max that can be entered
+  }
+
+  // If an operator was selected and new digits were clicked on, this part
+  // saves the operator that was selected for future operation.
+  if (currentOperator) {
+    operation.push(currentOperator);
+    currentOperator = '';
+  }
+
+  displayValue += this.textContent;
+  updateDisplay();
+}
+
 // Sets up digit buttons with event listeners
 const digits = document.querySelectorAll('.digit');
 digits.forEach((digit) => digit.addEventListener('click', enterDigit));
@@ -162,3 +185,7 @@ clear.addEventListener('click', () => {
   displayValue = '';
   currentOperator = '';
 });
+
+// Sets up decimal button with event listener
+const decimal = document.querySelector('.decimal');
+decimal.addEventListener('click', enterDecimal);
