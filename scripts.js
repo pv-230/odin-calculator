@@ -36,7 +36,6 @@ function multiply(a, b) {
  */
 function divide(a, b) {
   if (b === 0) {
-    console.log('test');
     throw new Error('Cannot divide by zero');
   }
   return a / b;
@@ -74,13 +73,13 @@ function updateDisplay() {
   // Breakpoints for display font size to avoid overflow
   if (displayValue.length <= 6) {
     display.setAttribute('style', 'font-size: 6rem;');
-  } else if (displayValue.length === 7) {
+  } else if (displayValue.length >= 7 && displayValue.length <= 9) {
     display.setAttribute('style', 'font-size: 4rem;');
-  } else if (displayValue.length === 10) {
+  } else if (displayValue.length >= 10 && displayValue.length <= 12) {
     display.setAttribute('style', 'font-size: 3rem;');
-  } else if (displayValue.length === 13) {
+  } else if (displayValue.length >= 13 && displayValue.length <= 15) {
     display.setAttribute('style', 'font-size: 2.5rem;');
-  } else if (displayValue.length === 16) {
+  } else if (displayValue.length >= 16 && displayValue.length <= 18) {
     display.setAttribute('style', 'font-size: 2.2rem;');
   } else if (displayValue.length >= 19) {
     display.setAttribute('style', 'font-size: 1.8rem;');
@@ -108,6 +107,10 @@ function enterDigit() {
   if (currentOperator) {
     operation.push(currentOperator);
     currentOperator = '';
+  } else if (!currentOperator && !displayValue) {
+    // This part resets the operation list if no current operator is set allows
+    // a new operation to be started when the last operator was an equal sign
+    operation.splice(0, operation.length);
   }
 
   displayValue += this.textContent;
@@ -125,6 +128,7 @@ function performOperation() {
     currentOperator = this.textContent;
   }
 
+  // Adds the operand to the operation list
   if (displayValue) {
     operation.push(Number.parseFloat(displayValue, 10));
     displayValue = '';
@@ -189,6 +193,19 @@ function removeLast() {
   }
 }
 
+/**
+ * Adds or removes a negative sign from the display.
+ */
+function enterSign() {
+  if (displayValue && !displayValue.includes('-')) {
+    displayValue = '-'.concat(displayValue);
+    updateDisplay();
+  } else if (displayValue && displayValue.includes('-')) {
+    displayValue = displayValue.replace('-', '');
+    updateDisplay();
+  }
+}
+
 // Event listener section
 
 const digits = document.querySelectorAll('.digit');
@@ -213,3 +230,6 @@ decimal.addEventListener('click', enterDecimal);
 
 const back = document.querySelector('.back');
 back.addEventListener('click', removeLast);
+
+const sign = document.querySelector('.sign');
+sign.addEventListener('click', enterSign);
