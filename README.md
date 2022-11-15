@@ -1,3 +1,6 @@
-# odin-calculator
+## Project description
+This is my attempt at the Calculator project from The Odin Project.
 
-https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/calculator
+Website link: N/A
+
+More info here: https://www.theodinproject.com/lessons/foundations-calculator
