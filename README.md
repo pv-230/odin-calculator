@@ -1,6 +1,4 @@
-## Project description
-This is my attempt at the Calculator project from The Odin Project.
+# The Odin Project: Calculator
+This is my attempt at the Calculator project from The Odin Project. The purpose of the project is to practice some fundamental javascript concepts by implementing a calculator.
 
-Website link: https://pv-230.github.io/odin-calculator/
-
-More info here: https://www.theodinproject.com/lessons/foundations-calculator
+More information here: https://www.theodinproject.com/lessons/foundations-calculator
